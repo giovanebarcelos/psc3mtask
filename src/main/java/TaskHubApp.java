@@ -58,8 +58,7 @@ public class TaskHubApp extends JFrame {
         });
 
         usuarioListItem.addActionListener((ActionEvent e) -> {
-            JOptionPane.showMessageDialog(this,
-                    "Lista Usuário - não foi implementado ainda");
+            cardLayout.show(mainPanel, USUARIO_SCREEN);
         });
 
         exitItem.addActionListener((ActionEvent e) -> {
