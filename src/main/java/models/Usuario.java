@@ -45,6 +45,10 @@ public class Usuario {
         this.senha = senha;
     }
 
+    public Usuario(){
+
+    }
+
     public Usuario(int id, String nome,
                    String email, String senha) {
         this.id = id;

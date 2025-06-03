@@ -12,7 +12,7 @@ public class TaskHubApp extends JFrame {
 
     public TaskHubApp(){
         setTitle("Task Hub Application");
-        setSize(800,600);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
