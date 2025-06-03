@@ -36,8 +36,8 @@ public class UsuarioListFrame extends JPanel {
         table.getColumn("Editar").setCellRenderer(new ButtonRenderer());
 
         table.getColumn("Excluir").setCellRenderer(new ButtonRenderer());
-        //table.getColumn("Excluir").setCellEditor(
-        //        new ButtonEditor( table, row -> removeUser(row)));
+        table.getColumn("Excluir").setCellEditor(
+                new ButtonEditor( table, row -> removeUser(row)));
 
         JScrollPane scrollPane = new JScrollPane(table);
 

@@ -14,7 +14,7 @@ public class TaskHubApp extends JFrame {
         setTitle("Task Hub Application");
         setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
         cardLayout = new CardLayout();
