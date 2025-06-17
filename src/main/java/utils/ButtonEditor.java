@@ -14,9 +14,6 @@ public class ButtonEditor extends AbstractCellEditor
     private JTable table;
     private int row;
 
-
-
-
     public interface ButtonClickListener {
         void onButtonClick(int row);
     }

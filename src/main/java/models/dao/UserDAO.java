@@ -43,4 +43,24 @@ public class UserDAO {
         }
 
     }
+
+    public void save(Usuario usuario) {
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        try {
+            tx.begin();
+            if (em.find(Usuario.class, usuario.getId()) == null){
+                em.persist(usuario);
+            } else {
+                em.merge(usuario);
+            }
+            tx.commit();
+        } catch (Exception e){
+            if (tx.isActive()) tx.rollback();
+            throw e;
+        } finally {
+            em.close();
+        }
+    }
 }

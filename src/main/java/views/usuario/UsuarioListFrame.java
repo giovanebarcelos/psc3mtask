@@ -34,6 +34,9 @@ public class UsuarioListFrame extends JPanel {
         table = new JTable(tableModel);
 
         table.getColumn("Editar").setCellRenderer(new ButtonRenderer());
+        table.getColumn("Editar").setCellEditor(
+                new ButtonEditor( table, row -> editUser(row)));
+
 
         table.getColumn("Excluir").setCellRenderer(new ButtonRenderer());
         table.getColumn("Excluir").setCellEditor(
@@ -42,16 +45,36 @@ public class UsuarioListFrame extends JPanel {
         JScrollPane scrollPane = new JScrollPane(table);
 
         btnNew = new JButton("Novo Usuário");
-        btnNew.addActionListener((ActionEvent e) -> {
-                JOptionPane.showMessageDialog(null,
-                        "Novo Usuário não implementado");
-        });
+        btnNew.addActionListener((ActionEvent e) -> incluirUsuario());
 
         JPanel panelBtn = new JPanel(new FlowLayout(FlowLayout.LEFT));
         panelBtn.add(btnNew);
 
         add(scrollPane, BorderLayout.CENTER);
         add(panelBtn, BorderLayout.SOUTH);
+    }
+
+    private void incluirUsuario() {
+        UsuarioForm form = new UsuarioForm((Frame) SwingUtilities.getWindowAncestor(this),
+                null, new UsuarioForm.FormListener(){
+            @Override
+            public void onSave(Usuario usuario) {
+                try {
+                    userDAO.save(usuario);
+                    loadUsuarios();
+                } catch (Exception e){
+                    JOptionPane.showMessageDialog(UsuarioListFrame.this,
+                            "Erro ao salvar: "+ e.getMessage());
+                }
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+        });
+
+        form.setVisible(true);
     }
 
     private void removeUser(int row) {
@@ -72,5 +95,25 @@ public class UsuarioListFrame extends JPanel {
             }
         }
 
+    }
+
+    private void editUser(int row) {
+        Usuario user = tableModel.getUserAt(row);
+
+        UsuarioForm form = new UsuarioForm( (Frame) SwingUtilities.getWindowAncestor(this),
+                user, new UsuarioForm.FormListener() {
+            @Override
+            public void onSave(Usuario usuario) {
+                userDAO.save(usuario);
+                loadUsuarios();
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+        });
+
+        form.setVisible(true);
     }
 }

@@ -53,4 +53,11 @@ public class UsuarioTableModel
     public Usuario getUserAt(int row) {
         return this.users.get(row);
     }
+
+    @Override
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return columnIndex == 4 || columnIndex == 5;
+    }
+
+
 }
